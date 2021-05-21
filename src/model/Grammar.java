@@ -8,6 +8,15 @@ public class Grammar {
 	
 	private String w;
 	private String initialSymbolG;
+	
+	public HashMap<String, Variable> getGramm() {
+		return gramm;
+	}
+
+	public void setGramm(HashMap<String, Variable> gramm) {
+		this.gramm = gramm;
+	}
+
 	private HashMap<String, Variable> gramm; 
 	
 	
@@ -38,12 +47,10 @@ public class Grammar {
 			}else {
 				gramm.put(symbolInitial, current);
 			}
-			setProductions(s, current);
-			
+			setProductions(s, current);			
 		}
 	}
 	
 	
-
 }
 
