@@ -10,6 +10,11 @@ public class Grammar {
 	private HashMap<String, Variable> gramm; 
 	private String initialSymbolG;
 	
+	public Grammar() {
+		
+		this.gramm = new HashMap<String, Variable>();
+	}
+	
 	public HashMap<String, Variable> getGramm() {
 		return gramm;
 	}
@@ -24,12 +29,6 @@ public class Grammar {
 
 	public void setInitialSymbolG(String initialSymbolG) {
 		this.initialSymbolG = initialSymbolG;
-	}
-
-	
-	public Grammar() {
-		
-		this.gramm = new HashMap<String, Variable>();
 	}
 
 	private void setProductions(String[] s, Variable v) {
