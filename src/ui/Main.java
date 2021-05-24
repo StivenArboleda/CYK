@@ -17,7 +17,7 @@ public class Main extends Application{
 		Parent root = FXMLLoader.load(getClass().getResource("fxml/cyk.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Login");
+		primaryStage.setTitle("CYK");
 		primaryStage.setResizable(false);
 		primaryStage.show();
 		

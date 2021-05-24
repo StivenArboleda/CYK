@@ -1,29 +1,25 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 
 public class CYK {
 	
-	public CYK() {
-		
-	}
-	
 	private Grammar g;
 	
-	
+	public CYK(Grammar g) {
+		this.g = g;
+	}
 	
 	public boolean isCYK(String chain) {
 		
 		
 		char[] chainChar = chain.toCharArray();
-		String[][][] cykMatrix = new String[chainChar.length][chainChar.length][0]; 
+		String[][][] cykMatrix = new String[chainChar.length][chainChar.length][]; 
 		iteratorCYKMatrix(chainChar, cykMatrix);
 		
 		for (int j = 1; j < cykMatrix.length; j++) {
-			for (int i = 0; i < cykMatrix.length - 1; i++) {
+			for (int i = 0; i < cykMatrix.length - j; i++) {
 				ArrayList<String> productionsFuture = new ArrayList<>();
 				for (int k = 0; k < j; k++) {
 					
@@ -39,6 +35,7 @@ public class CYK {
 						}
 					}
 				}
+				
 				CheckProduction(productionsFuture, cykMatrix, i, j);
 			}
 		}
@@ -46,6 +43,7 @@ public class CYK {
 		boolean containsInitialSymbol = false;
 		
 		String[] variableContains = cykMatrix[0][cykMatrix.length -1];
+		
 		if(variableContains != null) {
 			
 			for (int i = 0; i < variableContains.length && !containsInitialSymbol; i++) {
@@ -88,6 +86,7 @@ public class CYK {
 		}else {
 			cykMatrix[i][j] = null;
 		}
+		
 	}
 	
 	
