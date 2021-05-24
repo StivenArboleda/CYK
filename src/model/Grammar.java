@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 public class Grammar {
 	
 	private String w;
+	private HashMap<String, Variable> gramm; 
 	private String initialSymbolG;
 	
 	public HashMap<String, Variable> getGramm() {
@@ -16,9 +17,15 @@ public class Grammar {
 	public void setGramm(HashMap<String, Variable> gramm) {
 		this.gramm = gramm;
 	}
-
-	private HashMap<String, Variable> gramm; 
 	
+	public String getInitialSymbolG() {
+		return initialSymbolG;
+	}
+
+	public void setInitialSymbolG(String initialSymbolG) {
+		this.initialSymbolG = initialSymbolG;
+	}
+
 	
 	public Grammar() {
 		

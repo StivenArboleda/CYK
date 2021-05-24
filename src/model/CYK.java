@@ -3,6 +3,7 @@ package model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class CYK {
 	
@@ -12,9 +13,10 @@ public class CYK {
 	
 	private Grammar g;
 	
+	
+	
 	public boolean isCYK(String chain) {
 		
-		boolean generator = false;
 		
 		char[] chainChar = chain.toCharArray();
 		String[][][] cykMatrix = new String[chainChar.length][chainChar.length][0]; 
@@ -37,12 +39,57 @@ public class CYK {
 						}
 					}
 				}
-				//
+				CheckProduction(productionsFuture, cykMatrix, i, j);
 			}
 		}
 		
-		return generator;
+		boolean containsInitialSymbol = false;
+		
+		String[] variableContains = cykMatrix[0][cykMatrix.length -1];
+		if(variableContains != null) {
+			
+			for (int i = 0; i < variableContains.length && !containsInitialSymbol; i++) {
+				if(variableContains[i].equalsIgnoreCase(g.getInitialSymbolG())) {
+					containsInitialSymbol = true;
+				}
+			}
+		}
+		return containsInitialSymbol;
 	}
+	
+	
+	
+	public void CheckProduction(ArrayList<String> productionsFuture, String[][][] cykMatrix, int i, int j) {
+		
+		if(productionsFuture.size() > 0) {
+			ArrayList<String> variablesTotals = new ArrayList<>();
+			
+			for (Variable v : g.getGramm().values()) {
+				
+				boolean found = false;
+				
+				for (Iterator<String> v2 = productionsFuture.iterator(); v2.hasNext() && !found; ) {
+					String s = (String) v2.next();
+					if(v.getGra().contains(s)) {
+						found = true;
+						variablesTotals.add(v.getKey());
+					}
+				}
+			}
+			if(variablesTotals.size() > 0) {
+				String[] out = new String[variablesTotals.size()];
+				for (int k = 0; k < out.length; k++) {
+					out[k] =  variablesTotals.get(k);
+				}
+				cykMatrix[i][j] = out;
+			}else {
+				cykMatrix[i][j] = null;
+			}
+		}else {
+			cykMatrix[i][j] = null;
+		}
+	}
+	
 	
 	private void iteratorCYKMatrix(char[] chainChars, String[][][] cykMatrix) {
 		
