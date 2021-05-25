@@ -4,16 +4,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class CYK {
-	
+
+
 	private Grammar g;
-	
+
+	/**
+	 *
+	 * @param g Ingresa g de tipo Grammar por parametro
+	 */
 	public CYK(Grammar g) {
 		this.g = g;
 	}
-	
+
+	/**
+	 * Este es el metodo que verifica si cadena es generada por G
+	 * @param chain : Ingresa la cadena por parametro
+	 * @return containsInitialSymbol : Retorna si la cadena es aceptada o no
+	 */
 	public boolean isCYK(String chain) {
-		
-		
+
 		char[] chainChar = chain.toCharArray();
 		String[][][] cykMatrix = new String[chainChar.length][chainChar.length][]; 
 		iteratorCYKMatrix(chainChar, cykMatrix);
@@ -54,9 +63,15 @@ public class CYK {
 		}
 		return containsInitialSymbol;
 	}
-	
-	
-	
+
+
+	/**
+	 *Este método verifica si las variables de la gramática producen al menos una producción única
+	 * @param productionsFuture es el HashSet que almacena los posibles producciones de la gramática
+	 * @param cykMatrix es una matriz de cadenas que corresponde al cyk matriz.
+	 * @param i es un entero que corresponde a la posición de la cola de la matriz.
+	 * @param j es un entero que corresponde a la posición de la columna de la matriz.
+	 */
 	public void CheckProduction(ArrayList<String> productionsFuture, String[][][] cykMatrix, int i, int j) {
 		
 		if(productionsFuture.size() > 0) {
@@ -88,7 +103,12 @@ public class CYK {
 		}
 		
 	}
-	
+
+	/**
+	 * Este método inicializa la matriz de la primera columna
+	 * @param chainChars es una matriz de char que corresponde a los caracteres de la cadena de prueba.
+	 * @param cykMatrix es una matriz de cadenas que corresponde a la matriz cyk.
+	 */
 	
 	private void iteratorCYKMatrix(char[] chainChars, String[][][] cykMatrix) {
 		

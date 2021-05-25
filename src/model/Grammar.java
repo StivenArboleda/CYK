@@ -4,36 +4,57 @@ import java.util.HashMap;
 
 public class Grammar {
 
-	private HashMap<String, Variable> gramm; 
+	/**
+	 * gramm es una Hash Map que contiene todas las variables de la gramática
+	 */
+	private HashMap<String, Variable> gramm;
+
+	/**
+	 * initialSymbolG es la variable inicial de la gramática
+	 */
 	private String initialSymbolG;
-	
+
+	/**
+	 * Crea una nueva gramática con su Hash Map de variables vacío
+	 */
 	public Grammar() {
 		this.gramm = new HashMap<String, Variable>();
 	}
+
+	/**
+	 *
+	 * @return retorna la gramatica
+	 */
 	
 	public HashMap<String, Variable> getGramm() {
 		return gramm;
 	}
-/*
-	public void setGramm(HashMap<String, Variable> gramm) {
-		this.gramm = gramm;
-	}
-*/
-	
+
+	/**
+	 *
+	 * @return retorna el simbolo de la gramatica inicial
+	 */
 	public String getInitialSymbolG() {
 		return initialSymbolG;
 	}
-/*
-	public void setInitialSymbolG(String initialSymbolG) {
-		this.initialSymbolG = initialSymbolG;
-	}
-*/
+
+	/**
+	 *
+	 * @param s ingresa un arreglo de strings por parametro
+	 * @param v Ingresa una una v de tipo variable por parametro
+	 */
 	private void setProductions(String[] s, Variable v) {
 		for (int i = 1; i < s.length ; i++) {
 			v.addProductions(s[i]);
 		}
 	}
-	
+
+
+	/**
+	 * Este método permite agregar las variables a la gramática leyendo línea por
+	 * Linea que usuario ingresa
+	 * @param variables Ingresa una variable de tipo String por parametro
+	 */
 	public void fillGrammar(String variables) {
 		
 		String[] gic = variables.split("\n");
